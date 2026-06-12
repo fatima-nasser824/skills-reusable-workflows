@@ -12,37 +12,14 @@ on:
 
 permissions:
   contents: read
+
 jobs:
-  quality:
-    name: Node.js Quality Checks
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ inputs.node-version }}
-
-      - name: Install dependencies
-        run: |
-          if [ -f package-lock.json ] || [ -f yarn.lock ] || [ -f pnpm-lock.yaml ]; then
-            npm ci || true
-          fi
-
-      - name: Run quality checks
-        run: |
-          # placeholder for real quality checks (lint/test/typecheck)
-          echo "Running Node.js quality checks for version ${{ inputs.node-version }}"
-
-          jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ inputs.node-version }}
           cache: npm
@@ -53,8 +30,8 @@ jobs:
     name: Tests with Coverage
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ inputs.node-version }}
           cache: npm
@@ -65,8 +42,8 @@ jobs:
     name: E2E Tests with Playwright
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ inputs.node-version }}
           cache: npm
